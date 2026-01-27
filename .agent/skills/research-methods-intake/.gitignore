@@ -1,0 +1,23 @@
+# Output directories (user workspace, not part of skill package)
+knowledge-base/*
+!knowledge-base/.gitkeep
+drafts/*
+!drafts/.gitkeep
+output/*
+!output/.gitkeep
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
