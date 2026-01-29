@@ -1,0 +1,171 @@
+---
+title: "生态学数据分析报告"
+author: "分析者姓名"
+date: "`r Sys.Date()`"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    code-fold: show
+    code-tools: true
+    theme: cosmo
+    embed-resources: true
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+editor: visual
+execute:
+  warning: false
+  message: false
+---
+
+```{r setup, include=FALSE}
+# 加载必要的包
+library(tidyverse)
+
+# 设置全局选项
+knitr::opts_chunk$set(
+  echo = TRUE,
+  fig.width = 8,
+  fig.height = 6,
+  dpi = 300
+)
+```
+
+# 数据概况
+
+## 数据来源
+
+[描述数据的来源、采集时间、采集地点等基本信息]
+
+## 数据结构
+
+```{r data-loading}
+# 读取数据
+# data <- read_csv("your_data.csv")
+
+# 显示数据结构
+# str(data)
+# head(data)
+```
+
+[描述数据的基本结构：行数、列数、变量类型等]
+
+## 数据维度
+
+- **样本量**: [填写]
+- **变量数**: [填写]
+- **时间跨度**: [填写]
+- **空间范围**: [填写]
+
+---
+
+# 数据清洗
+
+## 缺失值处理
+
+```{r missing-values}
+# 检查缺失值
+# summary(data)
+# colSums(is.na(data))
+```
+
+[描述缺失值的情况及处理方法]
+
+## 异常值检测
+
+```{r outliers}
+# 异常值检测代码
+```
+
+[描述异常值的检测方法和处理策略]
+
+## 数据转换
+
+```{r data-transformation}
+# 数据格式转换、变量重编码等
+```
+
+[描述进行的数据转换操作]
+
+---
+
+# 分析方法
+
+[此部分将根据具体分析需求逐步填充。每个分析方法应包含以下子章节：]
+
+## [分析方法 1 名称]
+
+### 方法说明
+
+[简要说明该方法的原理、适用条件、统计假设等]
+
+**关键术语**:
+- [术语1]: [解释]
+- [术语2]: [解释]
+
+**统计公式**:
+
+[如适用，添加关键公式]
+
+### 分析代码
+
+```{r analysis-1}
+# 分析代码
+```
+
+### 结果
+
+[展示分析结果的表格或图表]
+
+```{r results-1}
+# 结果可视化代码
+```
+
+### 结果解释
+
+[对结果进行专业的解释，包括：]
+- 统计显著性
+- 生态学意义
+- 与研究假设的关系
+- 可能的生物学机制
+
+---
+
+## [分析方法 2 名称]
+
+### 方法说明
+
+[同上结构]
+
+### 分析代码
+
+```{r analysis-2}
+# 分析代码
+```
+
+### 结果
+
+```{r results-2}
+# 结果展示
+```
+
+### 结果解释
+
+[结果解释]
+
+---
+
+# 总结
+
+[对整体分析结果进行综合总结]
+
+---
+
+# 会话信息
+
+```{r session-info}
+sessionInfo()
+```
