@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 format:
   pdf:
     pdf-engine: xelatex
-    toc: true
+    toc: false
     toc-depth: 3
     number-sections: true
     colorlinks: true
@@ -20,15 +20,6 @@ format:
     papersize: a4
     fontsize: 12pt
     keep-tex: false
-  html:
-    toc: true
-    toc-depth: 3
-    toc-location: left
-    code-fold: true
-    code-summary: "显示代码"
-    code-tools: true
-    theme: cosmo
-    embed-resources: true
 editor: visual
 execute:
   warning: false
@@ -41,19 +32,15 @@ library(tidyverse)
 library(gtsummary)  # 专业表格包
 library(knitr)
 library(kableExtra) # 表格样式控制
+library(showtext)   # 中文字体支持
 
-# 根据操作系统自动选择中文字体
-# 这样可以确保在不同系统上都能正确显示中文
-if (Sys.info()["sysname"] == "Darwin") {  # macOS
-  cjk_font <- "Songti SC"
-} else if (Sys.info()["sysname"] == "Windows") {
-  cjk_font <- "SimSun"
-} else {  # Linux
-  cjk_font <- "WenQuanYi Micro Hei"
-}
+# 使用 showtext 处理中文字体
+# macOS 使用 STHeiti Light 字体
+font_add("cjk", regular = "/System/Library/Fonts/STHeiti Light.ttc")
+showtext_auto()
 
-# 设置 ggplot2 默认主题使用系统中文字体
-theme_set(theme_minimal(base_family = cjk_font))
+# 设置 ggplot2 默认主题使用中文字体
+theme_set(theme_minimal(base_family = "cjk"))
 
 # 设置 gtsummary 的主题为适合学术出版的样式
 theme_gtsummary_journal(journal = "jama")
@@ -63,7 +50,8 @@ knitr::opts_chunk$set(
   echo = FALSE,  # 代码默认隐藏
   fig.width = 8,
   fig.height = 6,
-  dpi = 300
+  dpi = 300,
+  fig.showtext = TRUE  # 启用 showtext 渲染
 )
 ```
 
@@ -215,17 +203,16 @@ knitr::opts_chunk$set(
 #   add_overall() %>%  # 添加总体统计
 #   modify_header(label ~ "**变量**") %>%
 #   bold_labels() %>%
-#   as_kable(caption = "描述性统计表") %>%  # 转换为kable格式以便在PDF中正确显示
-#   kable_styling(latex_options = c("striped", "hold_position"))  # 使用默认宽度
+#   as_kable(format = "latex", booktabs = TRUE, caption = "描述性统计表") %>%
+#   kable_styling(latex_options = "hold_position")
 #
 # 重要提示：
-# 1. 使用 as_kable() 将 gtsummary 表格转换为 kable 格式，确保在PDF中正确渲染
-# 2. 使用 kable_styling() 时建议使用默认宽度，避免指定 full_width 或 scale_down
-# 3. latex_options = "hold_position" 可以防止表格浮动到其他位置
-# 4. latex_options = "striped" 可以添加斑马纹样式，使表格更易读
-# 5. caption 参数中不要添加"表 x"等编号，PDF会自动添加"Table 1:", "Table 2:"等前缀
-# 6. 正确示例：caption = "描述性统计表"
-# 7. 错误示例：caption = "表1. 描述性统计表"（会导致重复显示）
+# 1. 使用 as_kable(format = "latex") 将 gtsummary 表格转换为 LaTeX 格式
+# 2. 必须指定 format = "latex"，否则表格会出现竖线和对齐问题
+# 3. 使用 booktabs = TRUE 生成专业的三线表样式
+# 4. latex_options = "hold_position" 防止表格浮动
+# 5. 不要使用 striped 选项（会产生交替行阴影）
+# 6. caption 中不要添加"表 x"等编号，PDF会自动添加编号
 ```
 
 [总结主要变量的中心趋势、离散程度、分布特征。使用gtsummary生成的表格符合学术出版标准，清晰展示统计量和组间差异]
@@ -517,13 +504,6 @@ knitr::opts_chunk$set(
 bibliography: references.bib
 csl: ecology.csl  # 或其他期刊的引用格式
 -->
-
-
-# 会话信息
-
-```{r session-info}
-sessionInfo()
-```
 
 
 # 附录
