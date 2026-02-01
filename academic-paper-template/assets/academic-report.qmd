@@ -1,0 +1,271 @@
+---
+title: "学术报告标题"
+author: "作者姓名"
+date: "`r Sys.Date()`"
+format:
+  pdf:
+    pdf-engine: xelatex
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    colorlinks: true
+    geometry:
+      - top=2.5cm
+      - bottom=2.5cm
+      - left=3cm
+      - right=3cm
+    mainfont: "Songti SC"
+    CJKmainfont: "Songti SC"
+    documentclass: article
+    papersize: a4
+    fontsize: 12pt
+    keep-tex: false
+bibliography: references.bib
+csl: ecology.csl
+editor: visual
+execute:
+  warning: false
+  message: false
+---
+
+```{r setup, include=FALSE}
+# 加载必要的包
+library(tidyverse)
+library(gtsummary)  # 专业表格包
+library(knitr)
+library(kableExtra) # 表格样式控制
+library(showtext)   # 中文字体支持
+
+# 使用 showtext 处理中文字体
+# 根据操作系统选择合适的字体路径：
+# macOS: "/System/Library/Fonts/STHeiti Light.ttc"
+# Windows: "C:/Windows/Fonts/simhei.ttf"
+# Linux: "/usr/share/fonts/opentype/noto/NotoSerifCJK-Regular.ttc"
+font_add("cjk", regular = "/System/Library/Fonts/STHeiti Light.ttc")
+showtext_auto()
+
+# 设置 ggplot2 默认主题使用中文字体
+theme_set(theme_minimal(base_family = "cjk"))
+
+# 设置 gtsummary 的主题为适合学术出版的样式
+theme_gtsummary_journal(journal = "jama")
+
+# 设置全局选项
+knitr::opts_chunk$set(
+  echo = FALSE,  # 代码默认隐藏
+  fig.width = 8,
+  fig.height = 6,
+  dpi = 300,
+  fig.showtext = TRUE  # 启用 showtext 渲染
+)
+```
+
+# 摘要
+
+[简要概述研究背景、目的、方法、主要结果和结论，通常250-300字]
+
+**关键词**：[关键词1]；[关键词2]；[关键词3]；[关键词4]；[关键词5]
+
+# 引言
+
+[介绍研究背景、研究现状、知识空白、研究问题和研究目标]
+
+# 方法
+
+## 研究区域与对象
+
+[描述研究的地理位置、环境特征、研究对象的基本信息]
+
+### 研究区域
+
+[描述研究地点的地理位置、气候特征、生态特征等]
+
+- **地理位置**：[填写]
+- **气候特征**：[填写]
+- **生态特征**：[填写]
+
+### 研究对象
+
+[描述研究的生物种类、生态系统类型或其他研究对象]
+
+- **物种/对象**：[填写]
+- **基本特征**：[填写]
+
+## 数据收集与采样设计
+
+[详细描述数据收集方法和采样设计]
+
+### 采样设计
+
+[描述采样方案：随机采样、系统采样、分层采样等]
+
+```{r sampling-design, fig.cap="采样设计示意图"}
+# 可视化采样设计（如适用）
+# 例如：采样点分布图、时间序列采样示意图等
+```
+
+### 样本量
+
+[说明样本量的确定依据和实际采集的样本数量]
+
+- **样本量**：[填写]
+- **重复次数**：[填写]
+
+### 数据收集
+
+[描述具体的数据收集方法、测量指标、测量工具等]
+
+```{r data-loading}
+# 读取数据
+# data <- read_csv("your_data.csv")
+# head(data)
+```
+
+## 数据处理与统计分析
+
+[描述数据处理步骤和统计分析方法]
+
+### 数据清洗
+
+[描述数据清洗过程：缺失值处理、异常值检测等]
+
+```{r data-cleaning}
+# 缺失值检查和处理
+# summary(data)
+# 异常值检测
+```
+
+### 统计分析方法
+
+[详细描述使用的统计方法及其理由]
+
+```{r statistical-analysis}
+# 主要统计分析代码
+# 例如：t检验、ANOVA、回归分析等
+```
+
+**分析方法**：[描述具体使用的统计方法]
+
+**显著性水平**：α = 0.05
+
+**软件**：R version [版本号]
+
+## 局限性与约束
+
+[诚实讨论研究方法的局限性]
+
+- **样本局限**：[描述]
+- **方法局限**：[描述]
+- **时空局限**：[描述]
+
+# 结果
+
+[报告研究的主要发现，使用表格和图表展示结果]
+
+## 描述性统计
+
+```{r descriptive-stats}
+# 使用 gtsummary 生成专业的描述性统计表格
+# 示例：
+# data %>%
+#   select(变量1, 变量2, 变量3) %>%
+#   tbl_summary(
+#     statistic = list(
+#       all_continuous() ~ "{mean} ({sd})",
+#       all_categorical() ~ "{n} ({p}%)"
+#     )
+#   ) %>%
+#   as_kable(format = "latex", booktabs = TRUE, caption = "描述性统计表") %>%
+#   kable_styling(latex_options = "hold_position")
+```
+
+[总结主要变量的描述性统计结果]
+
+## 主要发现
+
+### [发现1标题]
+
+```{r result-1, fig.cap="结果1图示"}
+# 绘制图表展示主要结果
+```
+
+[描述该结果的主要发现和统计显著性]
+
+### [发现2标题]
+
+```{r result-2, fig.cap="结果2图示"}
+# 绘制图表展示主要结果
+```
+
+[描述该结果的主要发现和统计显著性]
+
+### [发现3标题]
+
+```{r result-3, fig.cap="结果3图示"}
+# 绘制图表展示主要结果
+```
+
+[描述该结果的主要发现和统计显著性]
+
+# 讨论
+
+[解释和阐述研究结果的意义]
+
+## 主要发现的解释
+
+[解释主要结果的生物学或生态学意义]
+
+## 与已有研究的比较
+
+[将本研究结果与文献中的研究进行比较，讨论一致性和差异性]
+
+## 可能的机制
+
+[讨论可能的生物学或生态学机制来解释观察到的模式]
+
+## 研究的意义
+
+[讨论研究的理论意义和实践意义]
+
+### 理论贡献
+
+[本研究如何推进理论理解或填补知识空白]
+
+### 实践应用
+
+[研究结果的实际应用价值]
+
+## 研究局限性
+
+[诚实讨论研究的局限性]
+
+- **样本局限**：[描述]
+- **方法局限**：[描述]
+- **推广性局限**：[描述]
+
+# 结论
+
+[简要总结研究的主要发现和结论，通常3-5句话]
+
+
+# 参考文献
+
+[文献列表将根据引用自动生成。请在YAML头部配置bibliography和csl文件]
+
+# 附录
+
+## 附录A：补充材料
+
+[放置补充图表、详细数据或额外分析结果]
+
+```{r appendix-materials}
+# 补充材料代码
+```
+
+## 附录B：数据可用性声明
+
+[说明数据和代码的存储位置、访问方式等]
+
+- **数据存储**：[位置/链接]
+- **代码存储**：[GitHub仓库/其他]
+- **许可协议**：[CC-BY/MIT/其他]

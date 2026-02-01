@@ -2,12 +2,12 @@
 
 这个仓库包含两个给生态学研究用的 AI Skill：
 
-- **ecology-data-analysis**: 数据分析助手，处理 R 语言分析和 Quarto 报告生成
-- **ecology-research-assistant**: 文献助手，帮你检索和整理文献
+- **academic-paper-template**: 学术论文模板生成器，快速创建标准化的 Quarto 论文框架
+- **ecology-research-assistant**: 生态学文献助手，帮你检索和整理文献
 
 ## 目录结构
 
-- `ecology-data-analysis/`: R 分析流程、Quarto 模板、可视化规范
+- `academic-paper-template/`: 学术论文模板（支持多种论文类型和输出格式）
 - `ecology-research-assistant/`: 文献检索脚本和关键词策略
 
 ## 环境配置
@@ -132,7 +132,7 @@ export SEMANTIC_SCHOLAR_API_KEY="your-api-key"
 **全局安装**（所有项目可用）：
 ```bash
 # 复制到 Claude Code 的全局 skills 目录
-cp -r ecology-data-analysis ~/.claude/skills/
+cp -r academic-paper-template ~/.claude/skills/
 cp -r ecology-research-assistant ~/.claude/skills/
 ```
 
@@ -140,13 +140,13 @@ cp -r ecology-research-assistant ~/.claude/skills/
 ```bash
 # 在项目根目录创建 .agent/skills 目录
 mkdir -p .agent/skills
-cp -r ecology-data-analysis .agent/skills/
+cp -r academic-paper-template .agent/skills/
 cp -r ecology-research-assistant .agent/skills/
 ```
 
 使用时直接调用 skill 名称：
 ```bash
-/ecology-data-analysis
+/academic-paper-template
 /ecology-research-assistant
 ```
 
@@ -156,12 +156,12 @@ Codex 的 skill 安装方式类似：
 
 ```bash
 # 全局安装
-cp -r ecology-data-analysis ~/.codex/skills/
+cp -r academic-paper-template ~/.codex/skills/
 cp -r ecology-research-assistant ~/.codex/skills/
 
 # 或项目级安装
 mkdir -p .codex/skills
-cp -r ecology-data-analysis .codex/skills/
+cp -r academic-paper-template .codex/skills/
 cp -r ecology-research-assistant .codex/skills/
 ```
 
@@ -171,46 +171,19 @@ Gemini CLI 的 skill 配置：
 
 ```bash
 # 全局安装
-cp -r ecology-data-analysis ~/.gemini/skills/
+cp -r academic-paper-template ~/.gemini/skills/
 cp -r ecology-research-assistant ~/.gemini/skills/
 
 # 或项目级安装
 mkdir -p .gemini/skills
-cp -r ecology-data-analysis .gemini/skills/
+cp -r academic-paper-template .gemini/skills/
 cp -r ecology-research-assistant .gemini/skills/
 ```
 
 具体路径可能因版本而异，建议查看各工具的官方文档确认 skills 目录位置。
 
 ## 使用方法
-
-### 数据分析助手
-
-工作流程分三步：
-
-1. **意图对齐**: 回答 AI 关于数据类型和研究目标的问题
-2. **结构冻结**: AI 根据模板定制分析大纲，你确认分析方法
-3. **渐进式分析**: AI 逐章节写代码、生成图表，你在 RStudio 里运行并确认结果
-
-AI 会按照 `references/RENDERING_GUIDE.md` 的规范生成图表，并帮你写结果解释。
-
-### 文献助手
-
-基本流程：
-
-1. **关键词构建**: 告诉 AI 你的研究对象和问题，AI 会用"策略A（特定对象）"和"策略B（通用方法）"生成关键词
-2. **执行检索**:
-   - Semantic Scholar（推荐）:
-     ```bash
-     python scripts/search_literature.py "keywords" --limit 20 --year-start 2018
-     ```
-   - Google Scholar:
-     ```bash
-     python scripts/search_google_scholar.py "keywords"
-     ```
-3. **生成清单**: AI 会整理成带中文摘要和方法分类的文献列表
-
-
+直接调查SKILL后询问这个SKILL的用途和使用方法即可。
 
 ## 其他
 
